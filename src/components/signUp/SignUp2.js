@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import { View, Text, ImageBackground } from 'react-native'
 import { FormInput, Button } from 'react-native-elements'
@@ -7,22 +7,21 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 // @inject('AuthStore')
 @observer
-class SignUp1 extends React.Component {
+class SignUp2 extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       fontLoaded: true,
-      email: '',
-      email_valid: true,
-      password: '',
-      login_failed: false,
+      phone: '',
+      phone_valid: true,
       showLoading: false,
     }
   }
 
   static navigationOptions = {
-    title: 'Login',
+    header:null,
+    title: '',
   };
 
   async componentDidMount() {
@@ -30,12 +29,12 @@ class SignUp1 extends React.Component {
     console.log('state : ', this.state)
   }
 
-  validateEmail = (email) => {
+  validatePhone = (phone) => {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    return re.test(email)
+    return re.test(phone)
   }
 
-  submitLoginCredentials = () => {
+  submitCredentials = () => {
     const { showLoading } = this.state
 
     this.setState({
@@ -44,7 +43,7 @@ class SignUp1 extends React.Component {
   }
 
   render() {
-    const { email, password, email_valid, showLoading, fontLoaded } = this.state
+    const { phone, phone_valid, showLoading, fontLoaded } = this.state
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../../assets/images/bg_screen.jpg')} style={styles.bgImage}>
@@ -52,7 +51,10 @@ class SignUp1 extends React.Component {
             <View style={styles.loginView}>
               <View style={styles.loginTitle}>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={styles.travelText}>Txtsmarter</Text>
+                  <Text style={styles.travelText}>SIGN UP 2</Text>
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={styles.infoText}>We just texted you...</Text>
                 </View>
               </View>
               <View style={styles.loginInput}>
@@ -65,60 +67,38 @@ class SignUp1 extends React.Component {
                     />
                   }
                   containerStyle={{ marginVertical: 10 }}
-                  onChangeText={email => this.setState({ email })}
-                  value={email}
+                  onChangeText={phone => this.setState({ phone })}
+                  value={phone}
                   inputStyle={{ marginLeft: 10, color: 'white' }}
                   keyboardAppearance="light"
-                  placeholder="Email"
+                  placeholder="Enter your 4 digit code"
                   autoFocus={false}
                   autoCapitalize="none"
                   autoCorrect={false}
                   keyboardType="email-address"
                   returnKeyType="next"
-                  ref={input => (this.emailInput = input)}
+                  ref={input => (this.phoneInput = input)}
                   onSubmitEditing={() => {
-                    this.setState({ email_valid: this.validateEmail(email) })
+                    this.setState({ phone_valid: this.validatePhone(phone) })
                     this.passwordInput.focus()
                   }}
                   blurOnSubmit={false}
                   placeholderTextColor="white"
                   errorStyle={{ textAlign: 'center', fontSize: 12 }}
                   errorMessage={
-                    email_valid ? null : 'Please enter a valid email address'
+                    phone_valid ? null : 'Enter your 4 digit code'
                   }
-                />
-                <FormInput
-                  leftIcon={
-                    <Icon
-                      name="lock"
-                      color="rgba(171, 189, 219, 1)"
-                      size={25}
-                    />
-                  }
-                  containerStyle={{ marginVertical: 10 }}
-                  onChangeText={password => this.setState({ password })}
-                  value={password}
-                  inputStyle={{ marginLeft: 10, color: 'white' }}
-                  secureTextEntry={true}
-                  keyboardAppearance="light"
-                  placeholder="Password"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="default"
-                  returnKeyType="done"
-                  ref={input => (this.passwordInput = input)}
-                  blurOnSubmit={true}
-                  placeholderTextColor="white"
                 />
               </View>
               <Button
-                title="LOG IN"
+                title="Sign Up"
                 activeOpacity={1}
                 underlayColor="transparent"
-                onPress={this.submitLoginCredentials}
+                // onPress={this.submitCredentials}
+                onPress={() => this.props.navigation.navigate('signUp3')}
                 loading={showLoading}
                 loadingProps={{ size: 'small', color: 'white' }}
-                disabled={!email_valid && password.length < 8}
+                disabled={!phone_valid }
                 buttonStyle={{
                   height: 50,
                   width: 250,
@@ -130,17 +110,6 @@ class SignUp1 extends React.Component {
                 containerStyle={{ marginVertical: 10 }}
                 titleStyle={{ fontWeight: 'bold', color: 'white' }}
               />
-              <View style={styles.footerView}>
-                <Text style={{ color: 'grey' }}>New here?</Text>
-                <Button
-                  title="Sign Up"
-                  clear
-                  activeOpacity={0.5}
-                  titleStyle={{ color: 'white', fontSize: 15 }}
-                  containerStyle={{ marginTop: -10 }}
-                  onPress={() => this.props.navigation.navigate('signUp')}
-                />
-              </View>
             </View>
           ) : (
             <Text>Loading...</Text>
@@ -151,4 +120,4 @@ class SignUp1 extends React.Component {
   }
 }
 
-export default SignUp1
+export default SignUp2

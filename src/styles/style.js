@@ -1,4 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native';
+import colors from './colors'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -27,8 +28,13 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     travelText: {
-        color: 'white',
+        color: colors.snow,
         fontSize: 30,
+        // fontFamily: 'bold'
+    },
+    infoText: {
+        color: colors.snow,
+        fontSize: 20,
         // fontFamily: 'bold'
     },
     plusText: {
