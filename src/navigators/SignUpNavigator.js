@@ -2,8 +2,9 @@ import { createStackNavigator,createAppContainer } from "react-navigation";
 
 import Login from '../components/auth/Login';
 import SignUp from '../components/auth/SignUp';
+import SignUp1 from '../components/auth/SignUp1';
 
-const RootNavigator = createStackNavigator(
+const SignUpNavigator = createStackNavigator(
     {
         login: {
             screen: Login,
@@ -16,11 +17,17 @@ const RootNavigator = createStackNavigator(
             navigationOptions:{
                 header:null,
             }
-        }, 
+        },
+      signUp1: {
+        screen: SignUp1,
+        navigationOptions:{
+          header:null,
+        }
+      },
     },
     {
-        initialRouteName: "login",
+        initialRouteName: "signUp1",
     }
 );
 
-export default createAppContainer(RootNavigator);
+export default createAppContainer(SignUpNavigator);
