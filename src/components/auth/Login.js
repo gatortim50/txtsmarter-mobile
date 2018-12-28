@@ -23,14 +23,14 @@ class Login extends React.Component {
 
   static navigationOptions = {
     title: 'Login',
-  };
+  }
 
   async componentDidMount() {
     this.setState({ fontLoaded: true })
     console.log('state : ', this.state)
   }
 
-  validateEmail = (email) => {
+  validateEmail = email => {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(email)
   }
@@ -47,7 +47,10 @@ class Login extends React.Component {
     const { email, password, email_valid, showLoading, fontLoaded } = this.state
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/bg_screen.jpg')} style={styles.bgImage}>
+        <ImageBackground
+          source={require('../../assets/images/bg_screen.jpg')}
+          style={styles.bgImage}
+        >
           {fontLoaded ? (
             <View style={styles.loginView}>
               <View style={styles.loginTitle}>

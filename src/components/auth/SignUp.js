@@ -1,16 +1,15 @@
-import React from 'react';
-import { observer, inject } from 'mobx-react';
-import { View, Text, ImageBackground, Dimensions } from 'react-native';
-import { FormInput, Button } from 'react-native-elements';
-import styles from '../../styles/style';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import React from 'react'
+import { observer, inject } from 'mobx-react'
+import { View, Text, ImageBackground, Dimensions } from 'react-native'
+import { FormInput, Button } from 'react-native-elements'
+import styles from '../../styles/style'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // @inject('AuthStore')
 @observer
 class SignUp extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       fontLoaded: true,
@@ -18,44 +17,41 @@ class SignUp extends React.Component {
       email_valid: true,
       password: '',
       login_failed: false,
-      showLoading: false
-    };
+      showLoading: false,
+    }
   }
 
   static navigationOptions = {
-    title: 'Sign Up'
-  };
+    title: 'Sign Up',
+  }
 
   async componentDidMount() {
-    this.setState({ fontLoaded: true });
-    console.log('state : ', this.state);
+    this.setState({ fontLoaded: true })
+    console.log('state : ', this.state)
   }
 
   validateEmail = email => {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-    return re.test(email);
-  };
+    return re.test(email)
+  }
 
   submitLoginCredentials = () => {
-    const { showLoading } = this.state;
+    const { showLoading } = this.state
 
     this.setState({
-      showLoading: !showLoading
-    });
-  };
+      showLoading: !showLoading,
+    })
+  }
 
   render() {
-    const {
-      email,
-      password,
-      email_valid,
-      showLoading,
-      fontLoaded
-    } = this.state;
+    const { email, password, email_valid, showLoading, fontLoaded } = this.state
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/bg_screen.jpg')} style={styles.bgImage}>
+        <ImageBackground
+          source={require('../../assets/images/bg_screen.jpg')}
+          style={styles.bgImage}
+        >
           {fontLoaded ? (
             <View style={styles.loginView}>
               <View style={styles.loginTitle}>
@@ -85,8 +81,8 @@ class SignUp extends React.Component {
                   returnKeyType="next"
                   ref={input => (this.emailInput = input)}
                   onSubmitEditing={() => {
-                    this.setState({ email_valid: this.validateEmail(email) });
-                    this.passwordInput.focus();
+                    this.setState({ email_valid: this.validateEmail(email) })
+                    this.passwordInput.focus()
                   }}
                   blurOnSubmit={false}
                   placeholderTextColor="white"
@@ -133,7 +129,7 @@ class SignUp extends React.Component {
                   backgroundColor: 'transparent',
                   borderWidth: 2,
                   borderColor: 'white',
-                  borderRadius: 30
+                  borderRadius: 30,
                 }}
                 containerStyle={{ marginVertical: 10 }}
                 titleStyle={{ fontWeight: 'bold', color: 'white' }}
@@ -155,8 +151,8 @@ class SignUp extends React.Component {
           )}
         </ImageBackground>
       </View>
-    );
+    )
   }
 }
 
-export default SignUp;
+export default SignUp

@@ -21,14 +21,14 @@ class SignUp extends React.Component {
 
   static navigationOptions = {
     title: '',
-  };
+  }
 
   async componentDidMount() {
     this.setState({ fontLoaded: true })
     console.log('state : ', this.state)
   }
 
-  validatePhone = (phone) => {
+  validatePhone = phone => {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(phone)
   }
@@ -45,7 +45,10 @@ class SignUp extends React.Component {
     const { phone, phone_valid, showLoading, fontLoaded } = this.state
     return (
       <View style={styles.container}>
-        <ImageBackground source={require('../../assets/images/bg_screen.jpg')} style={styles.bgImage}>
+        <ImageBackground
+          source={require('../../assets/images/bg_screen.jpg')}
+          style={styles.bgImage}
+        >
           {fontLoaded ? (
             <View style={styles.loginView}>
               <View style={styles.loginTitle}>
@@ -94,7 +97,7 @@ class SignUp extends React.Component {
                 onPress={() => this.props.navigation.navigate('signUp2')}
                 loading={showLoading}
                 loadingProps={{ size: 'small', color: 'white' }}
-                disabled={!phone_valid }
+                disabled={!phone_valid}
                 buttonStyle={{
                   height: 50,
                   width: 250,
